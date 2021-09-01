@@ -253,7 +253,8 @@ print("shashasha???")
 b_j_f = open(B_J_Dir, 'r', encoding="utf-8")
 b_c_f = open(B_C_Dir, 'r', encoding="utf-8")
 # 合并执行文档
-comFile = open(Clip_Whole_Dir+Specified_Dir +"B_comFile.bat", "a+", encoding="utf-8")
+##comFile = open(Clip_Whole_Dir+Specified_Dir +"B_comFile.bat", "a+", encoding="utf-8")
+comFile = open(os.path.join(Clip_Whole_Dir,Specified_Dir ,"B_comFile.bat"), "a+", encoding="utf-8")
 
 print("shashasha!!!")
 
