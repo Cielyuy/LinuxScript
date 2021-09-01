@@ -53,7 +53,7 @@ MeshName = 'Model_100.msh'
 Mesh_Load_Dir = os.path.join(Clip_Whole_Dir,Mesh_load_dir_preffix , MeshName)
 
 ##Specified_Dir_preffix_1 ="task" + '\\'+ "0826_2" + '\\'  ###########!!!!!!!!!!
-Specified_Dir_preffix_1 =os.path.join("task" ,"0826_2" )
+Specified_Dir_preffix_1 =os.path.join("task" ,"0826_7" )
 Specified_Dir_preffix_2 = 'V' + '_'  ###########!!!!!!!!!!!
 #Specified_Dir = Specified_Dir_preffix_1 + Specified_Dir_preffix_2 + str(count_Total_Clip_Number) + '/'
 ##Specified_Dir = Specified_Dir_preffix_1 + Specified_Dir_preffix_2+str(varNum)+ '\\'  ###############指定储存复制文件的特定文佳夹
@@ -119,9 +119,11 @@ for files in os.listdir(os.path.join(Clip_Whole_Dir,Specified_Dir)):
 # 命名更改 复制
 for k in catchList:
     B_J_Middle_Name = B_J_middle_name_preffix + str(k) + ".jou"
-    B_J_Exported_Dir = Clip_Whole_Dir + Specified_Dir + B_J_Middle_Name  #####################命名jou等中间文件名称
+    ##B_J_Exported_Dir = Clip_Whole_Dir + Specified_Dir + B_J_Middle_Name  #####################命名jou等中间文件名称
+    B_J_Exported_Dir = os.path.join(Clip_Whole_Dir , Specified_Dir , B_J_Middle_Name ) #####################命名jou等中间文件名称
     B_C_Middle_Name = B_C_middle_name_preffix + str(k) + ".cse"
-    B_C_Exported_Dir = Clip_Whole_Dir + Specified_Dir + B_C_Middle_Name
+    ##B_C_Exported_Dir = Clip_Whole_Dir + Specified_Dir + B_C_Middle_Name
+    B_C_Exported_Dir = os.path.join(Clip_Whole_Dir , Specified_Dir , B_C_Middle_Name)
 
 
     c_src = Stored_Example_C_Dir  # 原文件信息
