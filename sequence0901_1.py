@@ -33,7 +33,7 @@ LastPara = -2000  ##################################
 
 CountNum = 300
 
-Mesh_num_preffix = 'M100_'
+Mesh_num_preffix = 'M500_'
 
 varNum = 85
 
@@ -48,7 +48,7 @@ Clip_Whole_Dir = os.path.abspath(os.path.dirname(os.getcwd()))
 
 ##Mesh_load_dir_preffix = 'basic_Mesh'+'\\'
 Mesh_load_dir_preffix = 'basic_Mesh'
-MeshName = 'Model_100.msh'
+MeshName = 'Model_500.msh'
 ##Mesh_Load_Dir = Clip_Whole_Dir+Mesh_load_dir_preffix + MeshName
 Mesh_Load_Dir = os.path.join(Clip_Whole_Dir,Mesh_load_dir_preffix , MeshName)
 
@@ -115,8 +115,14 @@ for files in os.listdir(os.path.join(Clip_Whole_Dir,Specified_Dir)):
     if files.endswith(".cse"):
         os.remove(os.path.join(Clip_Whole_Dir,Specified_Dir, files))
 
+linuxShName = 'linuxDocu.sh'
+linux_content_preffix_1 = '/public/home/hpc184212120/ZTC/ansys19/v192/fluent/bin/fluent  -g  3d  -t16 -wait -cnf=$hostlist   -mpi=intel -i '
 
+    #shutil.copyfile(src,trg)
+##shutil.copyfile(Clip_Whole_Dir + ##Stored_Example_J_middle_dir + linuxShName,Clip_Whole_Dir + Specified_Dir + 'B_' +linuxShName)
+shutil.copyfile(os.path.join(Clip_Whole_Dir , Stored_Example_J_middle_dir , linuxShName),os.path.join(Clip_Whole_Dir ,Specified_Dir , ('B_' +linuxShName)))
 # 命名更改 复制
+##for k in catchList:
 for k in catchList:
     B_J_Middle_Name = B_J_middle_name_preffix + str(k) + ".jou"
     ##B_J_Exported_Dir = Clip_Whole_Dir + Specified_Dir + B_J_Middle_Name  #####################命名jou等中间文件名称
@@ -133,15 +139,18 @@ for k in catchList:
     j_trg = B_J_Exported_Dir  # 现文件信息
 
     # shutil.copyfile(src,trg)
-
+    ##b_linux_sh = open(Clip_Whole_Dir + Specified_Dir +'B_' + linuxShName, "a+", encoding="utf-8")
+    b_linux_sh = open(os.path.join(Clip_Whole_Dir , Specified_Dir ,('B_' + linuxShName)), "a+", encoding="utf-8")
     b_j_f = open(B_J_Dir, 'a+', encoding="utf-8")
     b_c_f = open(B_C_Dir, 'a+', encoding="utf-8")
 
     # bat case文件编写
+    B_linux_Docu = linux_content_preffix_1 + B_J_Middle_Name + '\n'
     B_J_Docu = B_J_Content_Preffix + j_trg + "\n"
     B_C_Docu = B_C_Content_Preffix + c_trg + "\n"
     b_j_f.write(B_J_Docu)
     b_c_f.write(B_C_Docu)
+    b_linux_sh.write(B_linux_Docu)
 
     #########第一个文件替换功能
     f_c = open(c_src, "r", encoding="utf-8")
@@ -159,7 +168,9 @@ for k in catchList:
     cfdpostDataName = "CP_" + str(Mesh_num_preffix) + str(k) + '_' + str(varNum)
 
     C_Previous_Stored_Dat = r"D:\ZTC\0707\V85\FluentData_M317__-20_85.dat"
-    C_Now_Dat = Clip_Whole_Dir+Specified_Dir + FluentDataName + '.dat'
+    ##C_Now_Dat = Clip_Whole_Dir+Specified_Dir + (FluentDataName + '.dat')
+    C_Now_Dat = os.path.join(Clip_Whole_Dir+Specified_Dir + (FluentDataName + '.dat'))
+    
     C_Previous_Stored_Pic = r"D:\ZTC\0707\V85\CP_M317__-20_85.jpg"
     C_Now_Pic = Clip_Whole_Dir+Specified_Dir + cfdpostDataName + ".jpg"
 
@@ -169,7 +180,9 @@ for k in catchList:
     J_Previous_Stored_Mesh = "/file/read-case Me_317.msh"
     J_Now_mesh = '/file/read-case ' + Mesh_Load_Dir
     J_Previous_Stored_Cas ='FluentData_M317__52_1800.cas'
-    J_Now_Cas =Clip_Whole_Dir+Specified_Dir + FluentDataName + '.cas'
+    ##J_Now_Cas =Clip_Whole_Dir+Specified_Dir + FluentDataName + '.cas'
+    J_Now_Cas =os.path.join(Clip_Whole_Dir+Specified_Dir + (FluentDataName + '.cas'))
+
     J_Previous_Stored_Pic = 'FluentData_M317__52_1800jpg'
     J_Now_Pic = Clip_Whole_Dir+Specified_Dir + FluentDataName + 'jpg'
     
@@ -219,6 +232,7 @@ for k in catchList:
     f_c_new.close()
     b_j_f.close()
     b_c_f.close()
+    b_linux_sh.close()
 
     #####第二个文件替换功能
     f_j = open(j_src, "r", encoding="utf-8")
@@ -270,13 +284,13 @@ b_j_f.close()
 b_c_f.close()
 comFile.close()
 ##把py文件复制过去，并调用auxiliaryDir
-pyPath = os.path.join(txtDataStoredClipDir,'SinglePra.py')
+#pyPath = os.path.join(txtDataStoredClipDir,'SinglePra.py')
 # sinPath =  os.path.join(auxiliaryDir,'SinglePra.py')
-sinPath =  r'E:\LGF\Sim\Script\Auxiliary\SinglePra.py'
-shutil.copyfile(sinPath,pyPath)
+#sinPath =  r'E:\LGF\Sim\Script\Auxiliary\SinglePra.py'
+#shutil.copyfile(sinPath,pyPath)
 # shutil.copyfile(pyPath,sinPath)
 #os.system(Clip_Whole_Dir+Specified_Dir +"B_comFile.bat")##调用系统程序
 # os.system('cd '+txtDataStoredClipDir)
-os.system('cd '+txtDataStoredClipDir+ ' && python '+pyPath)
+#os.system('cd '+txtDataStoredClipDir+ ' && python '+pyPath)
 # os.system('python '+pyPath)
 #E:\LGF\Sim\Script\Auxiliary\SinglePra.py
