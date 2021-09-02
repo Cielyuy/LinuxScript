@@ -170,7 +170,6 @@ for k in catchList:
     C_Previous_Stored_Dat = r"D:\ZTC\0707\V85\FluentData_M317__-20_85.dat"
     ##C_Now_Dat = Clip_Whole_Dir+Specified_Dir + (FluentDataName + '.dat')
     C_Now_Dat = os.path.join(Clip_Whole_Dir+Specified_Dir + (FluentDataName + '.dat'))
-    
     C_Previous_Stored_Pic = r"D:\ZTC\0707\V85\CP_M317__-20_85.jpg"
     C_Now_Pic = Clip_Whole_Dir+Specified_Dir + cfdpostDataName + ".jpg"
 
